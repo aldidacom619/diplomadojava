@@ -105,8 +105,13 @@ public class RepositorioPropiedad extends RepositorioAbstracto<Propiedad> {
 	//Deberá completarlo para que devuelva una instancia de tipo propiedad.
 	//P/ej. D;1-A;90;07;E-9,C-12;VH;2
 	private Propiedad crearDepartamento(String[] valores) {
-		
-		return null;
+		String id = valores[1];
+		Double metroCuadrados = Double.valueOf(valores[2]);
+		Propietario propietario = repositorioPropietario.recuperar(valores[3]);
+		Map<ZonaReparto,Double> porcentajePorZona = convertirZonaReparto(valores[4]);
+		TipoVivienda tipoVivienda = TipoVivienda.convert(valores[5]);
+		Integer numeroDormitorio = Integer.valueOf(valores[6]);
+		return  new Departamento(id,metroCuadrados,propietario,porcentajePorZona,tipoVivienda,numeroDormitorio);
 	}
 	
 	//TODO Este metodo recibe un arreglo con los campos de un local comercial
@@ -114,17 +119,34 @@ public class RepositorioPropiedad extends RepositorioAbstracto<Propiedad> {
 	//Deberá completarlo para que devuelva una instancia de tipo propiedad.
 	//P/ej. L;0-A;80;04;E-8;Banco Mundial;Banca
 	private Propiedad crearLocalComercial(String[] valores) {
-		
-		return null;
+		String id = valores[1];
+		Double metroCuadrados = Double.valueOf(valores[2]);
+		Propietario propietario = repositorioPropietario.recuperar(valores[3]);
+		Map<ZonaReparto,Double> porcentajePorZona = convertirZonaReparto(valores[4]);
+		String nombreComercial = valores[5];
+		String actividadComercial = valores[6];		
+		return new LocalComercial(id, metroCuadrados, propietario, porcentajePorZona, nombreComercial,actividadComercial);
 	}	
 	
 	//TODO Este metodo recibe un arreglo con los campos de plaza garaje 
-//	incluyendo una referencia al propietario y a los porcentajes de la zona de reparto
+    //incluyendo una referencia al propietario y a los porcentajes de la zona de reparto
 	//Deberá completarlo para que devuelva una instancia de tipo propiedad.
 	//P/ej. G;P01;12;14;G-10;A;N
 	private Propiedad crearPlazaGaraje(String[] valores) {
 				
-		return null;
+		String id = valores[1];
+		Double metroCuadrados = Double.valueOf(valores[2]);
+		Propietario propietario = repositorioPropietario.recuperar(valores[3]);
+		Map<ZonaReparto,Double> porcentajePorZona = convertirZonaReparto(valores[4]);
+		TipoGaraje tipoGaraje = TipoGaraje.convert(valores[5]);
+		boolean conDeposito;
+		if(valores[6].equalsIgnoreCase("N")) {
+			conDeposito = false;
+		}
+		else {
+			conDeposito = true;
+		}
+		return new PlazaGaraje(id, metroCuadrados, propietario, porcentajePorZona, tipoGaraje, conDeposito);
 	}		
 	
 

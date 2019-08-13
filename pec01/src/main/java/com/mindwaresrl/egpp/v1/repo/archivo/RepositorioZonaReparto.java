@@ -21,7 +21,21 @@ public class RepositorioZonaReparto extends RepositorioAbstracto<ZonaReparto> {
 	@Override
 	List<String> obtenerLineas(BufferedReader reader) throws IOException {
 		List<String> lineasSeccion = new ArrayList<String>();
-		
+		String linea = null;
+		while((linea = reader.readLine()) != null) {
+			if(linea.startsWith("#Zona")) {
+				while((linea = reader.readLine()) != null) {
+					if(StringUtils.isBlank(linea)){
+						break;
+					}else if (linea.startsWith(".")) {
+						continue;
+					}
+					lineasSeccion.add(linea);
+				}
+				break;
+				
+			}
+		}
 		return lineasSeccion;
 	}
 	//TODO Este metodo recibe una linea de la seccion #Zona del archivo comunidad.txt
@@ -29,8 +43,8 @@ public class RepositorioZonaReparto extends RepositorioAbstracto<ZonaReparto> {
 	//P/Ej: E;Escalera;P
 	@Override
 	ZonaReparto convertirRegistro(String registro) {
-		
-		return new ZonaReparto(" ", " ", TipoReparto.PROPORCIONAL);
+		String vector[] = registro.split(";");
+		return new ZonaReparto(vector[0],vector[1], TipoReparto.PROPORCIONAL);
 	}
 	
 	@Override

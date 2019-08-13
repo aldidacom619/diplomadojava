@@ -45,8 +45,8 @@ public class RepositorioComunidad extends RepositorioAbstracto<Comunidad> {
 	//Ej: "01;Trebol;Temporal"
 	@Override
 	Comunidad convertirRegistro(String registro) {
-
-		return new Comunidad("", "", "");
+	  String vector[] = registro.split(";");
+	  return new Comunidad(vector[0],vector[1],vector[2]);
 	}
 
 

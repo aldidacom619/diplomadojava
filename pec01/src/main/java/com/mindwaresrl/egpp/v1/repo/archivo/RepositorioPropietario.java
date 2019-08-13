@@ -45,8 +45,8 @@ public class RepositorioPropietario extends RepositorioAbstracto<Propietario> {
 	//P/Ej: 01;Jorge Salas;Sopocachi (La Paz);jsalas@dominio.com
 	@Override
 	Propietario convertirRegistro(String registro) {
-		
-		return new Propietario(" ", " ", " ", " ");
+		String vector[] = registro.split(";");
+		return new Propietario(vector[0],vector[1],vector[2],vector[3]);
 	}
 	
 	@Override
